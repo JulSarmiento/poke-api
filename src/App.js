@@ -44,14 +44,22 @@ function App() {
   
   return (
     <div className="App">
-      Pagina Principal
+      <h1>PokeApi</h1>
 
-      <SearchForm/>
+      <div className='main'>
+        <SearchForm/>
 
-      <button disabled={!pagination.previous} onClick={() => fetchPokemons(pagination.previous)}>Anterior</button>
-      <button disabled={!pagination.next} onClick={() => fetchPokemons(pagination.next)}>Siguiente</button>
+        <div className='card-container'>
+          {pokemons.map((pokemon) => <PokeCard key={pokemon.url} pokemon={pokemon}/>)}
+        </div>
 
-      {pokemons.map((pokemon) => <PokeCard key={pokemon.url} pokemon={pokemon}/>)}
+
+        <div className='btn-container'>
+          <button disabled={!pagination.previous} onClick={() => fetchPokemons(pagination.previous)}>Anterior</button>
+          <button disabled={!pagination.next} onClick={() => fetchPokemons(pagination.next)}>Siguiente</button>
+        </div>
+      </div>
+      
     </div>
   );
 }

@@ -1,10 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
+
 /**
  * @see https://github.com/PokeAPI/sprites
  */
 function PokeCard({ pokemon, type }) {
+
+  const capitalizeFirstLetter = (str) => {
+    const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+    return capitalized;
+  };
+
   const img = pokemon.url
     .slice(0, -1)
     .replace(
@@ -13,11 +23,14 @@ function PokeCard({ pokemon, type }) {
     ) + ".png";
       
   return (
-    <div>
-      <p>{pokemon.name}</p>
-      <img src={img} alt="foto del bichito" />
-      <a href={pokemon.url}>Detalles</a>
-    </div>
+    <Card style={{ width: '18rem' }}>
+      <Card.Img variant="top" src={img} />
+      <Card.Body>
+        <Card.Title>{capitalizeFirstLetter(pokemon.name)}</Card.Title>
+        <Button href={pokemon.url} variant="primary">Detalles</Button>
+      </Card.Body>
+    </Card>
+
   );
 }
 
