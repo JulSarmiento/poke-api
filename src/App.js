@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+
+
+import logo from './Assets/imgs/logo.png'
 import './App.css';
 import PokeCard from './Components/PokeCard/Index';
 import SearchForm from './Components/SearchForm/Index';
+
 
 // Logica del fetch
 
@@ -44,6 +50,13 @@ function App() {
   
   return (
     <div className="App">
+
+      <Navbar expand="lg" variant="light" bg="light">
+        <Container>
+          <Navbar.Brand href="#"><img src={logo} className="logo" alt="logo de StudyCorn Dev"/></Navbar.Brand>
+        </Container>
+      </Navbar>
+
       <h1>PokeApi</h1>
 
       <div className='main'>
@@ -59,6 +72,21 @@ function App() {
           <button disabled={!pagination.next} onClick={() => fetchPokemons(pagination.next)}>Siguiente</button>
         </div>
       </div>
+
+
+      <footer className='footer'>
+        <ul>
+          <li>
+            <a href="https://instagram.com/studycorndev?igshid=YmMyMTA2M2Y=">instagram</a>
+          </li>
+          <li>
+            <a href="https://github.com/JulSarmiento">GitHub</a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/julieth-sarmiento/">LinkedIn</a>
+          </li>
+        </ul>
+      </footer>
       
     </div>
   );
