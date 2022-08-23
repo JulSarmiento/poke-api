@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import Button from 'react-bootstrap/Button';
+import Badge from 'react-bootstrap/Badge';
 import Card from 'react-bootstrap/Card';
 
 import './index.css'
@@ -31,6 +32,7 @@ function PokeCard({ pokemon, type }) {
     })
   }, [pokemon]);
 
+ 
   if(!info) {
     return <img src="https://cdn.dribbble.com/users/946764/screenshots/2844436/pokeball.gif" alt="loading"/>
   }
@@ -44,15 +46,16 @@ function PokeCard({ pokemon, type }) {
       
   return (
     <Card style={{ width: '18rem', textAlign: 'center' }} >
+      <Badge className="poke-number" bg="none">{info.game_indices[3].game_index}</Badge>
       <Card.Img variant="top" src={img} />
       <Card.Body>
-        <Card.Text>
-          {info.types.map(({type: {name}, slot}) => {
-            return <span className={`slot-${name}`} key={slot}>{name}</span>
-          })}
-        </Card.Text>
         <Card.Title>{capitalizeFirstLetter(pokemon.name)}</Card.Title>
-        <Button href={pokemon.url} variant="primary">Detalles</Button>
+        <Card.Text className="types-container">
+          {info.types.map(({type: {name}, slot}) => {
+            return <span className={`slot-${name} types`} key={slot}>{capitalizeFirstLetter(name)}</span>
+          })}
+        </Card.Text>        
+        <Button href={pokemon.url} className="btn-card" variant="primary">Detalles</Button>
       </Card.Body>
     </Card>
 

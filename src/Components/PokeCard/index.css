@@ -1,3 +1,27 @@
+.poke-number {
+  font-size: 20px;
+  color: red;
+  text-align: justify;
+}
+
+.types-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.types {
+  border-radius: 10px;
+  padding: 1px 20px; 
+  color: white;  
+}
+
+.btn-card{
+  width: 100%;
+  
+}
+
 /* Normal */
 .slot-normal {
   background-color:  #acaa7a;
