@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Button from 'react-bootstrap/Button';
 
 import logo from './Assets/imgs/logo.png'
 import './App.css';
 import PokeCard from './Components/PokeCard/Index';
-import SearchForm from './Components/SearchForm/Index';
-
 
 // Logica del fetch
 
@@ -60,7 +59,15 @@ function App() {
       <h1>PokeApi</h1>
 
       <div className='main'>
-        <SearchForm/>
+
+        <div>
+          <p>Filtrar por Generariones</p>
+          <ButtonGroup aria-label="Basic example">
+            <Button variant="secondary">Left</Button>
+            <Button variant="secondary">Middle</Button>
+            <Button variant="secondary">Right</Button>
+          </ButtonGroup>
+        </div>
 
         <div className='card-container'>
           {pokemons.map((pokemon) => <PokeCard key={pokemon.url} pokemon={pokemon}/>)}
