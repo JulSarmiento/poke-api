@@ -24,6 +24,36 @@
   align-items: center;
 }
 
+.main .pokemon-types {
+  width: 90%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.main .pokemon-types p {
+  color: red;
+} 
+
+.main .pokemon-types .types-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+  margin: 0 auto;
+  width: 90%;
+  gap: 20px;
+}
+
+.main .pokemon-types .types-container .btn-styles{
+  color: white;
+  width: 80px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  
+}
 
 .main .card-container{
   justify-content: center;

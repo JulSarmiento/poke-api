@@ -83,7 +83,7 @@
 }
 
 /* Electric */
-.slot-17 {
+.slot-electric {
   background-color:  #f7d233;
 }
 
@@ -98,7 +98,7 @@
 }
 
 /* Dragon */
-.slot-drgon {
+.slot-dragon {
   background-color:  #6357a6;
 }
 
@@ -110,6 +110,16 @@
 /* Fairy */
 .slot-fairy {
   background-color:  #f7cbdf;
+}
+
+/* Fairy */
+.slot-unknown {
+  background-color:  #1c9784;
+}
+
+/* Fairy */
+.slot-shadow {
+  background-color:  #5e4b84;
 }
 
 

@@ -5,8 +5,10 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 
 import logo from './Assets/imgs/logo.png'
+import './Components/PokeCard/index.css'
 import './App.css';
 import PokeCard from './Components/PokeCard/Index';
+
 
 // Logica del fetch
 
@@ -21,11 +23,26 @@ function App() {
 
   const [pokemons, setPokemons] = useState([]);
 
+  const [types, setTypes] = useState([]);
+
   const listPokemons = async (url = `${URL}/pokemon?limit=20&offset=0`) => {
     const res = await fetch(url);
     const json = await res.json();
     return json;
   };
+
+  const listTypes = async (url = `${URL}/type`) => {
+    const res = await fetch(url);
+    const json = await res.json()
+    return json
+  }
+
+
+  // Pendiente conseguir la lista de los pokemons en este url
+  const pokemonFilter = async (name) => {
+    const pokemonByType = await fetch(`${URL}/types/${name}`);
+    console.log(pokemonByType)
+  }
 
   // pendeinte investigar useCallback
   const fetchPokemons = useCallback((url) => {
@@ -43,6 +60,13 @@ function App() {
     fetchPokemons();
   }, [fetchPokemons]);
 
+  useEffect(() => {
+    listTypes().then(({results}) => {
+      setTypes(results)
+    });
+  }, []);
+
+  console.log(types)
   if (isLoading) {
     return <img src="https://cdn.dribbble.com/users/946764/screenshots/2844436/pokeball.gif" alt="loading"/>
   }
@@ -60,21 +84,19 @@ function App() {
 
       <div className='main'>
 
-        <div>
-          <p>Filtrar por Generariones</p>
-          <ButtonGroup aria-label="Basic example">
-            <Button variant="secondary">Left</Button>
-            <Button variant="secondary">Middle</Button>
-            <Button variant="secondary">Right</Button>
+        <div className="pokemon-types">
+          <p>Filtrar por types</p>
+          <ButtonGroup  aria-label="Basic example" className="types-container">
+            {types.map(({name}) => <Button key={name} className={`btn-styles slot-${name} `} onClick={pokemonFilter} >{name}</Button> ) }
           </ButtonGroup>
         </div>
 
-        <div className='card-container'>
+        <div className="card-container">
           {pokemons.map((pokemon) => <PokeCard key={pokemon.url} pokemon={pokemon}/>)}
         </div>
 
 
-        <div className='btn-container'>
+        <div className="btn-container">
           <button disabled={!pagination.previous} onClick={() => fetchPokemons(pagination.previous)}>Anterior</button>
           <button disabled={!pagination.next} onClick={() => fetchPokemons(pagination.next)}>Siguiente</button>
         </div>
