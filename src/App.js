@@ -12,8 +12,6 @@ import PokeCard from './Components/PokeCard/Index';
 
 // Logica del fetch
 
-//https://pokeapi.co/api/v2/pokemon?limit=20&offset=0
-
 // url base
 const URL = 'https://pokeapi.co/api/v2';
 
@@ -40,9 +38,17 @@ function App() {
 
   // Pendiente conseguir la lista de los pokemons en este url
   const pokemonFilter = async (name) => {
-    const pokemonByType = await fetch(`${URL}/types/${name}`);
-    console.log(pokemonByType)
+    const res = await fetch(`${URL}/type/${name}`);
+    const {pokemon} = await res.json()
+    if(pokemon) {
+      const filtered = pokemon.map((item) => item.pokemon);
+      console.log("Pokemons filtered", filtered)
+      setPokemons(filtered);
+      setPagination({})
+
+    }
   }
+
 
   // pendeinte investigar useCallback
   const fetchPokemons = useCallback((url) => {
@@ -56,13 +62,17 @@ function App() {
     }, 1000);
   }, []);
 
+
+  // Fetch all pokemons with offset limit
   useEffect( () =>{
     fetchPokemons();
   }, [fetchPokemons]);
 
+
+  // List all the types
   useEffect(() => {
     listTypes().then(({results}) => {
-      setTypes(results)
+      setTypes(results);
     });
   }, []);
 
@@ -80,16 +90,15 @@ function App() {
         </Container>
       </Navbar>
 
-      <h1>PokeApi</h1>
-
       <div className='main'>
 
         <div className="pokemon-types">
-          <p>Filtrar por types</p>
           <ButtonGroup  aria-label="Basic example" className="types-container">
-            {types.map(({name}) => <Button key={name} className={`btn-styles slot-${name} `} onClick={pokemonFilter} >{name}</Button> ) }
+            {types.map(({name}) => <Button key={name} className={`btn-styles slot-${name}`} onClick={() => pokemonFilter(name)} >{name}</Button> ) }
           </ButtonGroup>
         </div>
+
+        <h1>PokeApi</h1>
 
         <div className="card-container">
           {pokemons.map((pokemon) => <PokeCard key={pokemon.url} pokemon={pokemon}/>)}

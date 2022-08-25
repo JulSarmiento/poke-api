@@ -12,7 +12,7 @@ import './index.css'
 /**
  * @see https://github.com/PokeAPI/sprites
  */
-function PokeCard({ pokemon, type }) {
+function PokeCard({ pokemon: {url, name}, type }) {
 
   const [info, setInfo] = useState();
 
@@ -21,9 +21,14 @@ function PokeCard({ pokemon, type }) {
     return capitalized;
   };
 
+  const onError = (e) => {
+    e.target.onerror = null;
+    e.target.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png";
+  }
+
   useEffect( () => {
     const fetchPokemon = async () => {
-      const res = await fetch(pokemon.url);
+      const res = await fetch(url);
       const json = await res.json();
       return json;
     };
@@ -31,14 +36,14 @@ function PokeCard({ pokemon, type }) {
     fetchPokemon().then((json) => {
       setInfo(json)
     })
-  }, [pokemon]);
+  }, [url]);
 
  
-  if(!info) {
+  if(!info) { 
     return <img src="https://cdn.dribbble.com/users/946764/screenshots/2844436/pokeball.gif" alt="loading"/>
   }
 
-  const img = pokemon.url
+  const img = url
     .slice(0, -1)
     .replace(
       "https://pokeapi.co/api/v2/pokemon/",
@@ -47,16 +52,16 @@ function PokeCard({ pokemon, type }) {
       
   return (
     <Card style={{ width: '18rem', textAlign: 'center' }} >
-      <Badge className="poke-number" bg="none">{info.game_indices[3].game_index}</Badge>
-      <Card.Img variant="top" src={img} />
+      <Badge className="poke-number" bg="none">{info.id}</Badge>
+      <Card.Img variant="top" height="300px" src={img} onError={onError}/>
       <Card.Body>
-        <Card.Title>{capitalizeFirstLetter(pokemon.name)}</Card.Title>
+        <Card.Title>{capitalizeFirstLetter(name)}</Card.Title>
         <Card.Text className="types-container">
           {info.types.map(({type: {name}, slot}) => {
             return <span className={`slot-${name} types`} key={slot}>{capitalizeFirstLetter(name)}</span>
           })}
         </Card.Text>        
-        <Button href={pokemon.url} className="btn-card" variant="primary">Detalles</Button>
+        <Button href={url} className="btn-card" variant="primary">Detalles</Button>
       </Card.Body>
     </Card>
 
