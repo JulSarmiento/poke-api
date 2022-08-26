@@ -35,20 +35,17 @@ function App() {
     return json
   }
 
-
   // Pendiente conseguir la lista de los pokemons en este url
   const pokemonFilter = async (name) => {
     const res = await fetch(`${URL}/type/${name}`);
     const {pokemon} = await res.json()
     if(pokemon) {
       const filtered = pokemon.map((item) => item.pokemon);
-      console.log("Pokemons filtered", filtered)
       setPokemons(filtered);
       setPagination({})
 
     }
   }
-
 
   // pendeinte investigar useCallback
   const fetchPokemons = useCallback((url) => {
@@ -76,7 +73,6 @@ function App() {
     });
   }, []);
 
-  console.log(types)
   if (isLoading) {
     return <img src="https://cdn.dribbble.com/users/946764/screenshots/2844436/pokeball.gif" alt="loading"/>
   }

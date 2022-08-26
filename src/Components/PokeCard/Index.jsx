@@ -8,6 +8,7 @@ import Card from 'react-bootstrap/Card';
 
 import './index.css'
 import PokeModal from "../Modal/Index";
+import capitalizeFirstLetter from "../Utilities/Capitalize";
 
   
 /**
@@ -17,11 +18,6 @@ function PokeCard({ pokemon: {url, name}, type }) {
 
   const [modalShow, setModalShow] = useState(false);
   const [info, setInfo] = useState();
-
-  const capitalizeFirstLetter = (str) => {
-    const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
-    return capitalized;
-  };
 
   const onError = (e) => {
     e.target.onerror = null;
@@ -67,10 +63,14 @@ function PokeCard({ pokemon: {url, name}, type }) {
 
           <Button className="btn-card" variant="primary" onClick={() => setModalShow(true)}>Detalles</Button>
           <PokeModal
-
+            
+            pokemon={info}
+            pokePicture={img}
             options={{
               show: modalShow,
-              onHide : () => setModalShow(false)
+              onHide : () => setModalShow(false),
+              
+
             }}
           />
         </Card.Body>
