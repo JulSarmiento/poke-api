@@ -7,6 +7,7 @@ import Badge from 'react-bootstrap/Badge';
 import Card from 'react-bootstrap/Card';
 
 import './index.css'
+import PokeModal from "../Modal/Index";
 
   
 /**
@@ -14,6 +15,7 @@ import './index.css'
  */
 function PokeCard({ pokemon: {url, name}, type }) {
 
+  const [modalShow, setModalShow] = useState(false);
   const [info, setInfo] = useState();
 
   const capitalizeFirstLetter = (str) => {
@@ -51,19 +53,33 @@ function PokeCard({ pokemon: {url, name}, type }) {
     ) + ".png";
       
   return (
-    <Card style={{ width: '18rem', textAlign: 'center' }} >
-      <Badge className="poke-number" bg="none">{info.id}</Badge>
-      <Card.Img variant="top" height="300px" src={img} onError={onError}/>
-      <Card.Body>
-        <Card.Title>{capitalizeFirstLetter(name)}</Card.Title>
-        <Card.Text className="types-container">
-          {info.types.map(({type: {name}, slot}) => {
-            return <span className={`slot-${name} types`} key={slot}>{capitalizeFirstLetter(name)}</span>
-          })}
-        </Card.Text>        
-        <Button href={url} className="btn-card" variant="primary">Detalles</Button>
-      </Card.Body>
-    </Card>
+    <div>
+      <Card style={{ width: '18rem', textAlign: 'center' }} >
+        <Badge className="poke-number" bg="none">{info.id}</Badge>
+        <Card.Img variant="top" height="300px" src={img} onError={onError}/>
+        <Card.Body>
+          <Card.Title>{capitalizeFirstLetter(name)}</Card.Title>
+          <Card.Text className="types-container">
+            {info.types.map(({type: {name}, slot}) => {
+              return <span className={`slot-${name} types`} key={slot}>{capitalizeFirstLetter(name)}</span>
+            })}
+          </Card.Text>     
+
+          <Button className="btn-card" variant="primary" onClick={() => setModalShow(true)}>Detalles</Button>
+          <PokeModal
+
+            options={{
+              show: modalShow,
+              onHide : () => setModalShow(false)
+            }}
+          />
+        </Card.Body>
+      </Card>
+
+
+
+
+    </div>
 
   );
 }
