@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import capitalizeFirstLetter from '../Utilities/Capitalize';
 
-
+import './index.css'
 import '../PokeCard/index.css'
 
 
@@ -29,9 +29,6 @@ function PokeModal({ options, pokemon, pokePicture }) {
       const uniques = new Set(weaks);
       setPokeWeaks([...uniques]);
     })
-    // pokemon.types.forEach(({type: {name}, slot}) => {
-    //   getWeaksness(name).then(setPokeWeaks())
-    // });
   }, [pokemon.types])
 
   useEffect(() => {
@@ -58,20 +55,24 @@ function PokeModal({ options, pokemon, pokePicture }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <span>No.{pokemon.id}</span>  {capitalizeFirstLetter(pokemon.name)}
+          <span className='poke-number'>No.{pokemon.id}</span>  {capitalizeFirstLetter(pokemon.name)}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="modal-body">
-        <img height="300px" src={pokePicture} alt="pokemon" />
+      <Modal.Body className="modal-body poke-body">
+        <img src={pokePicture} alt="pokemon" />
         <div>
-          <div>
-            <p>Tipo</p>
-            {pokemon.types.map(({type: {name}, slot}) => {
-              return <span className={`slot-${name} types`} key={slot}>{capitalizeFirstLetter(name)}</span>
-            })}
-
-            <p>Debilidad</p>
-            <pre>{JSON.stringify(pokeweaks, undefined, 2)}</pre>
+          <div className='tipos-container'>
+            <div>
+              <p>Tipo</p>
+              {pokemon.types.map(({type: {name}, slot}) => {
+                return <span className={`slot-${name} types`} key={slot}>{capitalizeFirstLetter(name)}</span>
+              })}
+            </div>
+            <div>
+              <p>Debilidad</p>
+              {pokeweaks.map(item =>  <span  key={Math.random} className={`slot-${item} types`} >{item}</span>)}
+            </div>
+                        
           </div>
           <div>
             <ul>

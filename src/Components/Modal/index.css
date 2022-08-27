@@ -1,0 +1,26 @@
+.poke-number{
+  font-weight: bold;
+  font-style: oblique;
+  margin-right: 10px;
+}
+
+.poke-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.poke-body img{
+  height: 200px;
+  width: 200px;
+  align-self: center;
+}
+
+.poke-body .tipos-container {
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  gap: 30px;
+}
