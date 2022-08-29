@@ -74,7 +74,7 @@ function App() {
   }, []);
 
   if (isLoading) {
-    return <img src="https://cdn.dribbble.com/users/946764/screenshots/2844436/pokeball.gif" alt="loading"/>
+    return <div className='loading'><img  src="https://cdn.dribbble.com/users/946764/screenshots/2844436/pokeball.gif" alt="loading"/></div>
   }
   
   return (
@@ -90,11 +90,11 @@ function App() {
 
         <div className="pokemon-types">
           <ButtonGroup  aria-label="Basic example" className="types-container">
-            {types.map(({name}) => <Button key={name} className={`btn-styles slot-${name}`} onClick={() => pokemonFilter(name)} >{name}</Button> ) }
+            {types.map(({name}) => <Button key={name} className={`btn-styles slot-${name} `} onClick={() => pokemonFilter(name)} >{name}</Button> ) }
           </ButtonGroup>
         </div>
 
-        <h1>PokeApi</h1>
+        <h1 className='title'>PokeApi by: <span>StudCorn Dev</span></h1>
 
         <div className="card-container">
           {pokemons.map((pokemon) => <PokeCard key={pokemon.url} pokemon={pokemon}/>)}
@@ -102,8 +102,8 @@ function App() {
 
 
         <div className="btn-container">
-          <button disabled={!pagination.previous} onClick={() => fetchPokemons(pagination.previous)}>Anterior</button>
-          <button disabled={!pagination.next} onClick={() => fetchPokemons(pagination.next)}>Siguiente</button>
+          <button className="btn-general btn-home" disabled={!pagination.previous} onClick={() => fetchPokemons(pagination.previous)}>Anterior</button>
+          <button className="btn-general btn-home" disabled={!pagination.next} onClick={() => fetchPokemons(pagination.next)}>Siguiente</button>
         </div>
       </div>
 

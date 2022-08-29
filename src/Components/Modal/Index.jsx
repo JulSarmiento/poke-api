@@ -7,10 +7,25 @@ import './index.css'
 import '../PokeCard/index.css'
 
 
+function stringFix( string) { 
+  return decodeURIComponent(string)
+}
+
+function weightConvert(number) {
+  return number * (1.0 / 10.0)
+}
+
+function heighttConvert(number) {
+  return (number * (0.1 / 1.0)).toFixed(1)
+}
+
+
+
 function PokeModal({ options, pokemon, pokePicture }) {
 
   const [pokeDescription, setPokeDescription] = useState("");
   const [pokeweaks, setPokeWeaks] = useState("")
+
 
 
   useEffect(() => {
@@ -41,10 +56,10 @@ function PokeModal({ options, pokemon, pokePicture }) {
 
     getDescription().then((detail) => {
       const [{flavor_text: description}] = detail.flavor_text_entries;
-      setPokeDescription(description);
+      setPokeDescription(description.replace(/(\r\n|\||\f|\r)/gm, " "));
     })
   }, [pokemon.species.url])
-
+  
     // 
   return (
     <Modal
@@ -59,41 +74,58 @@ function PokeModal({ options, pokemon, pokePicture }) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="modal-body poke-body">
-        <img src={pokePicture} alt="pokemon" />
-        <div>
-          <div className='tipos-container'>
-            <div>
-              <p>Tipo</p>
+
+        <div className='poke-info'>
+          <img src={pokePicture} alt="pokemon" className='poke-img'/>
+          <div className='poke-stats'>
+
+            <ul>
+              <li className='stat-info'><span>Weight:</span> <p>{weightConvert(pokemon.weight)} kg</p></li>
+              <li className='stat-info'><span>Height:</span> <p>{heighttConvert(pokemon.height)} m</p></li>
+              <li className='stat-info'>
+                <span>Abilities:</span>
+                <ul className='abiilities'>
+                {pokemon.abilities.map(ability => <li key={Math.random()}>{capitalizeFirstLetter(ability.ability.name)}</li>)}
+                </ul>
+              </li>
+              <li className='stat-info'>
+                <span>Decription:</span>
+                <p className='description'>
+                  {stringFix(capitalizeFirstLetter(pokeDescription))}
+                </p>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+        
+
+        
+        <div className='types-container'>
+
+          <div>
+            <p className='type-title'>Strong against: </p>
+            <div className='element-types-container'>
               {pokemon.types.map(({type: {name}, slot}) => {
                 return <span className={`slot-${name} types`} key={slot}>{capitalizeFirstLetter(name)}</span>
               })}
             </div>
-            <div>
-              <p>Debilidad</p>
-              {pokeweaks.map(item =>  <span  key={Math.random} className={`slot-${item} types`} >{item}</span>)}
-            </div>
-                        
           </div>
+
           <div>
-            <ul>
-              <li><span>Peso:</span> {pokemon.weight}</li>
-              <li><span>Altura:</span> {pokemon.height}</li>
-              <li><span>Habilidades:</span>
-                <ul>
-                {pokemon.abilities.map(ability => <li key={Math.random()}>{ability.ability.name}</li>)}
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <p>
-            {capitalizeFirstLetter(pokeDescription.toLocaleLowerCase())}
-          </p>
+            <p className='type-title'>Weak against: </p>
+            <div className='element-types-container'>
+              {!pokeweaks ? " " : pokeweaks.map(item =>  <span  key={pokeweaks} className={`slot-${item} types`} >{capitalizeFirstLetter(item)}</span>)} 
+            </div>                                      
+          </div>    
 
         </div>
+              
+
 
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={options.onHide}>Close</Button>
+        <Button className='btn-general' onClick={options.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   )

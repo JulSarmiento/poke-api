@@ -2,6 +2,7 @@
   font-weight: bold;
   font-style: oblique;
   margin-right: 10px;
+  color: #b90230a9;
 }
 
 .poke-body{
@@ -11,16 +12,110 @@
   padding: 20px;
 }
 
-.poke-body img{
-  height: 200px;
-  width: 200px;
+.modal-body {
+  background-color: rgba(243, 230, 232, 0.795);
+}
+
+
+.poke-body .poke-info {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.poke-body .poke-info .poke-img{
+  height: 300px;
   align-self: center;
 }
 
-.poke-body .tipos-container {
-  border: 1px solid red;
+.poke-body .poke-info .poke-stats{
+  border: none;
+  padding: 5px;
+  border-radius: 10px;
+  color:#500c1da9 ;
+  width: 100%;
+}
+
+.poke-body .poke-info .poke-stats ul{
+  list-style: none;
+  margin: 0;
+  padding: 0 10px;
+}
+
+.poke-body .poke-info .poke-stats ul li{
+  margin-top: 10px;
+}
+
+.poke-body .poke-info .poke-stats ul li span{
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.poke-body .poke-info .poke-stats ul li p{
+  margin-left: 10px;
+}
+
+.poke-body .poke-info .poke-stats ul li .abiilities{
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+
+
+.poke-body .types-container {
   display: flex;
   justify-content: space-around;
   text-align: center;
-  gap: 30px;
+  flex-direction: column;
+  margin-bottom: 20px;
+  padding: 10px;
+
+}
+
+.poke-body .types-container .type-title {
+  font-weight: bold;
+  color: #633641a9;
+}
+
+.poke-body .types-container .element-types-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.poke-body .types-container .element-types-container span {
+  width: 90px;
+  text-align: center;
+
+}
+
+.poke-body .description {
+  text-align: left;  
+  width: 200px;
+}
+
+@media (min-width: 424px) {
+  
+  .poke-body .poke-info .poke-img{
+    height: 400px;
+    align-self: center;
+  }
+}
+
+
+@media (min-width: 768px) {
+  
+  .poke-body .poke-info .poke-img{
+    height: 500px;
+    align-self: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  
+  .poke-body .poke-info .poke-stats{
+    width: 200px;
+  }
 }

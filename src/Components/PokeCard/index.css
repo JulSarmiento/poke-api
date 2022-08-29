@@ -1,7 +1,25 @@
+.card-card-container {
+  transition: 1s;
+}
+
+.card-card-container:hover {
+  box-shadow: 10px 10px 34px -9px rgba(185,2,48,0.31);
+}
+
 .poke-number {
   font-size: 20px;
   color: red;
   text-align: justify;
+}
+
+.card-body{
+  background-color: #ffe4eaa9;
+}
+
+.poke-name{
+  color: #b90230 ;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
 }
 
 .types-container {
@@ -18,8 +36,20 @@
 }
 
 .btn-card{
-  width: 100%;
-  
+  width: 100%;  
+}
+
+.btn-general {
+  background-color: #b90230a9;
+  color: white;
+  letter-spacing: 0.5px;
+  transition: 1s;
+}
+
+.btn-general:hover {
+  background-color: white ;
+  color: #b90230a9;
+  letter-spacing: 0.5px;
 }
 
 /* Normal */
@@ -44,7 +74,7 @@
 
 /* Ground */
 .slot-ground{
-  background-color:  #b8b8d0;
+  background-color:  #dbca98;
 }
 
 /* Rock */

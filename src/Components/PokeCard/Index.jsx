@@ -50,18 +50,18 @@ function PokeCard({ pokemon: {url, name}, type }) {
       
   return (
     <div>
-      <Card style={{ width: '18rem', textAlign: 'center' }} >
+      <Card className="card-card-container" style={{ width: '18rem', textAlign: 'center' }} >
         <Badge className="poke-number" bg="none">{info.id}</Badge>
         <Card.Img variant="top" height="300px" src={img} onError={onError}/>
-        <Card.Body>
-          <Card.Title>{capitalizeFirstLetter(name)}</Card.Title>
+        <Card.Body className="card-body">
+          <Card.Title className="poke-name">{capitalizeFirstLetter(name)}</Card.Title>
           <Card.Text className="types-container">
             {info.types.map(({type: {name}, slot}) => {
               return <span className={`slot-${name} types`} key={slot}>{capitalizeFirstLetter(name)}</span>
             })}
           </Card.Text>     
 
-          <Button className="btn-card" variant="primary" onClick={() => setModalShow(true)}>Detalles</Button>
+          <Button className="btn-card btn-general" variant="none" onClick={() => setModalShow(true)}>See more</Button>
           <PokeModal
             
             pokemon={info}
